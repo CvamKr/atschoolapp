@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AttendanceFilterScreen extends StatelessWidget {
-  const AttendanceFilterScreen({super.key});
+class NewAttendanceFilterScreen extends StatelessWidget {
+  const NewAttendanceFilterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +39,10 @@ class AttendanceFilterScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
         child: ListView(
           children: [
-            buildSubjects(attendanceFilterProvider),
-            buildGrade2(attendanceFilterProvider),
-            buildDivision(attendanceFilterProvider),
-            buildGender(attendanceFilterProvider),
+            buildGrade(attendanceFilterProvider),
+            // buildGrade2(attendanceFilterProvider),
+            buildPeriod(attendanceFilterProvider),
+            // buildGender(attendanceFilterProvider),
             buildApplyFilterBtn()
           ],
         ),
@@ -79,14 +79,14 @@ class AttendanceFilterScreen extends StatelessWidget {
     );
   }
 
-  buildSubjects(AttendanceFilterProvider attendanceFilterProvider) {
+  buildGrade(AttendanceFilterProvider attendanceFilterProvider) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 34.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Subject',
+            'Grade',
             style: TextStyle(
               color: Color(0xFF142E47),
               fontSize: 16,
@@ -99,9 +99,17 @@ class AttendanceFilterScreen extends StatelessWidget {
           Wrap(
             alignment: WrapAlignment.start,
             children: [
-              createSubjectCard("Maths", attendanceFilterProvider),
-              createSubjectCard("English", attendanceFilterProvider),
-              createSubjectCard("Gujarati", attendanceFilterProvider),
+              buildGradeCard("LKG", attendanceFilterProvider),
+              buildGradeCard("UKG", attendanceFilterProvider),
+              buildGradeCard("I", attendanceFilterProvider),
+              buildGradeCard("II", attendanceFilterProvider),
+              buildGradeCard("III", attendanceFilterProvider),
+              buildGradeCard("IV", attendanceFilterProvider),
+              buildGradeCard("VV", attendanceFilterProvider),
+              buildGradeCard("VII", attendanceFilterProvider),
+              buildGradeCard("VIII", attendanceFilterProvider),
+              buildGradeCard("XI", attendanceFilterProvider),
+              buildGradeCard("X", attendanceFilterProvider),
             ],
           ),
         ],
@@ -109,43 +117,14 @@ class AttendanceFilterScreen extends StatelessWidget {
     );
   }
 
-  buildGender(AttendanceFilterProvider attendanceFilterProvider) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 34.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Gender',
-            style: TextStyle(
-              color: Color(0xFF142E47),
-              fontSize: 16,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-              height: 0,
-            ),
-          ),
-          19.heightBox,
-          Wrap(
-            alignment: WrapAlignment.start,
-            children: [
-              createGenderCard("Male", attendanceFilterProvider),
-              createGenderCard("Female", attendanceFilterProvider),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  buildDivision(AttendanceFilterProvider attendanceFilterProvider) {
+  buildPeriod(AttendanceFilterProvider attendanceFilterProvider) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 19.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Division',
+            'Session',
             style: TextStyle(
               color: Color(0xFF142E47),
               fontSize: 16,
@@ -158,11 +137,12 @@ class AttendanceFilterScreen extends StatelessWidget {
           Wrap(
             alignment: WrapAlignment.start,
             children: [
-              buildDivisionCard('A', attendanceFilterProvider),
-              buildDivisionCard('B', attendanceFilterProvider),
-              buildDivisionCard('C', attendanceFilterProvider),
-              buildDivisionCard('D', attendanceFilterProvider),
-              buildDivisionCard('E', attendanceFilterProvider),
+              buildPeriodCard('1st', attendanceFilterProvider),
+              buildPeriodCard('2nd', attendanceFilterProvider),
+              buildPeriodCard('3rd', attendanceFilterProvider),
+              buildPeriodCard('4th', attendanceFilterProvider),
+              buildPeriodCard('5th', attendanceFilterProvider),
+              buildPeriodCard('6th', attendanceFilterProvider),
             ],
           ),
         ],
@@ -170,7 +150,7 @@ class AttendanceFilterScreen extends StatelessWidget {
     );
   }
 
-  Widget buildDivisionCard(
+  Widget buildPeriodCard(
       String division, AttendanceFilterProvider attendanceFilterProvider) {
     return InkWell(
       onTap: () {
@@ -207,14 +187,14 @@ class AttendanceFilterScreen extends StatelessWidget {
     );
   }
 
-  Widget createSubjectCard(
+  Widget buildGradeCard(
       String subjectName, AttendanceFilterProvider attendanceFilterProvider) {
     return InkWell(
       onTap: () {
         attendanceFilterProvider.setSelectedSubject(subjectName);
       },
       child: Padding(
-        padding: const EdgeInsets.only(right: 8.0),
+        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
         child: Container(
           decoration: ShapeDecoration(
             color: attendanceFilterProvider.selectedSubject == subjectName
@@ -277,158 +257,6 @@ class AttendanceFilterScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  buildGrade2(AttendanceFilterProvider attendanceFilterProvider) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 34.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Grade',
-            style: TextStyle(
-              color: Color(0xFF142E47),
-              fontSize: 16,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-              height: 0,
-            ),
-          ),
-          19.heightBox,
-          Container(
-            height: 48,
-            decoration: ShapeDecoration(
-              color: const Color(0xFFD9EAFB),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Row(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: Text(
-                    'Standard',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w400,
-                      height: 0,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                Container(
-                  margin: const EdgeInsets.all(5),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFF163656),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 22),
-                    child: Center(
-                      child: DropdownButton<String>(
-                        underline: Container(),
-                        items: attendanceFilterProvider.listGrades
-                            .map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          attendanceFilterProvider.setSelectedGrade(newValue);
-                        },
-                        value: attendanceFilterProvider.selectedGrade,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                        ),
-                        selectedItemBuilder: (BuildContext context) {
-                          return attendanceFilterProvider.listGrades
-                              .map((String value) {
-                            return Center(
-                              child: Text(
-                                value,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            );
-                          }).toList();
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  buildSection() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Section',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.start,
-            children: [
-              createCustomCard('A'),
-              createCustomCard('B'),
-              createCustomCard('C'),
-              createCustomCard('D'),
-              createCustomCard('E'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  buildSession() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Session',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Wrap(
-            alignment: WrapAlignment.start,
-            children: [
-              createCustomCard('1st'),
-              createCustomCard('2nd'),
-              createCustomCard('3rd'),
-              createCustomCard('4th'),
-              createCustomCard('5th'),
-            ],
-          ),
-        ],
       ),
     );
   }

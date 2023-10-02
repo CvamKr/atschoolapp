@@ -1,15 +1,17 @@
 import 'package:atschoolapp/presentation/ui/attendance/attendace_filter.dart';
+import 'package:atschoolapp/presentation/ui/new_attendance/attendance_template.dart';
+import 'package:atschoolapp/presentation/ui/new_attendance/new_filter_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class AttendanceScreen extends StatefulWidget {
-  const AttendanceScreen({super.key});
+class NewAttendanceScreen extends StatefulWidget {
+  const NewAttendanceScreen({super.key});
 
   @override
-  State<AttendanceScreen> createState() => _AttendanceScreenState();
+  State<NewAttendanceScreen> createState() => _NewAttendanceScreenState();
 }
 
-class _AttendanceScreenState extends State<AttendanceScreen> {
+class _NewAttendanceScreenState extends State<NewAttendanceScreen> {
   TextEditingController controllerSearch =
       TextEditingController(text: "Search Student by Name");
 
@@ -20,7 +22,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             'Attendance',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -34,7 +36,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -45,14 +47,15 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           child: ListView(
             children: [
               buildSearchBox(context),
-              SizedBox(
+              const SizedBox(
                 height: 26,
               ),
               ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {
-                  return buildStudentTemplate();
+                  return const AttendanceTemplate();
                 },
               ),
             ],
@@ -63,12 +66,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   Container buildStudentTemplate() {
     return Container(
         width: 100,
-        margin: EdgeInsets.only(bottom: 14),
+        margin: const EdgeInsets.only(bottom: 14),
         // height: 100,
         decoration: ShapeDecoration(
           color: Colors.white,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
+            side: const BorderSide(
               width: 1,
               color: Color(0xBF142E47),
             ),
@@ -86,7 +89,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
                 width: 40,
                 height: 40,
-                decoration: ShapeDecoration(
+                decoration: const ShapeDecoration(
                   color: Color(0xFFE6E6E6),
                   shape: OvalBorder(),
                 ),
@@ -94,7 +97,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 child: Center(child: Image.asset('assets/images/Frame.png')),
               ),
             ),
-            Expanded(
+            const Expanded(
                 child: Text(
               'Satish Kumar',
               style: TextStyle(
@@ -136,7 +139,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         child: Center(
           child: Text(
             attendanceStatus,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black, // Change the text color as needed
             ),
           ),
@@ -153,7 +156,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               width: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
                   colors: [
@@ -165,7 +168,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   transform: GradientRotation(220.04),
                 ),
                 boxShadow: [
-                  BoxShadow(
+                  const BoxShadow(
                     color: Color.fromRGBO(0, 0, 0, 0.1),
                     blurRadius: 8.0,
                     spreadRadius: 2.0,
@@ -178,12 +181,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
                 child: Row(
                   children: [
-                    Icon(Icons.search, color: Colors.white),
+                    const Icon(Icons.search, color: Colors.white),
                     16.widthBox,
                     Expanded(
                       child: TextField(
                         controller: controllerSearch,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     )
                   ],
@@ -193,8 +196,10 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         13.widthBox,
         IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => AttendanceFilterScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (c) => const NewAttendanceFilterScreen()));
             },
             icon: Image.asset('assets/images/Group.png'))
       ],
