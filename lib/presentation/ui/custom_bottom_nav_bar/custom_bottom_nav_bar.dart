@@ -1,3 +1,4 @@
+import 'package:atschoolapp/presentation/ui/conduct_checkins/select_student.dart';
 import 'package:atschoolapp/presentation/ui/home/home_screen.dart';
 import 'package:atschoolapp/presentation/ui/new_attendance/new_attendance_screen.dart';
 import 'package:flutter/material.dart';
@@ -116,9 +117,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     Container(),
 
     // NewAttendanceScreen(),
-    Center(
-      child: Text("hello world!"),
-    )
+    SelectStudent()
   ];
 
   @override
