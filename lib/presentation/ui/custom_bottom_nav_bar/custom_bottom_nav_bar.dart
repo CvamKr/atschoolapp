@@ -1,3 +1,5 @@
+import 'package:atschoolapp/presentation/ui/attendance/attendance.dart';
+import 'package:atschoolapp/presentation/ui/conduct_checkins/select_and_conduct_checkins.dart';
 import 'package:atschoolapp/presentation/ui/conduct_checkins/select_student.dart';
 import 'package:atschoolapp/presentation/ui/home/home_screen.dart';
 import 'package:atschoolapp/presentation/ui/new_attendance/new_attendance_screen.dart';
@@ -67,16 +69,32 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   onTap: () {
                     Navigator.pop(context);
 
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => NewAttendanceScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => AttendanceScreen()));
                   },
                   child: Row(
                     children: [
                       buildUserAvatar(),
                       Text(
                         "Attendance",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      )
+                    ],
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => SelectStudent()));
+                  },
+                  child: Row(
+                    children: [
+                      buildUserAvatar(),
+                      Text(
+                        "Checkin",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       )
@@ -117,7 +135,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     Container(),
 
     // NewAttendanceScreen(),
-    SelectStudent()
+    // SelectStudent()
+    Center(
+      child: Text("Security"),
+    )
   ];
 
   @override
@@ -158,9 +179,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.add_circle_outline,
-                ),
+                icon: Icon(Icons.add_circle_outline, size: 42),
                 label: 'Search',
               ),
               BottomNavigationBarItem(

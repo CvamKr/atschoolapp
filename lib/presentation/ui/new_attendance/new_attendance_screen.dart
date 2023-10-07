@@ -55,7 +55,7 @@ class _NewAttendanceScreenState extends State<NewAttendanceScreen> {
                 shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {
-                  return const AttendanceTemplate();
+                  return const NewAttendanceTemplate();
                 },
               ),
             ],

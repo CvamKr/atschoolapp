@@ -1,3 +1,4 @@
+import 'package:atschoolapp/presentation/ui/conduct_checkins/review/review.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -35,8 +36,8 @@ class QuestionsPage extends StatelessWidget {
       body: ListView(
         children: [
           Container(
-            margin: EdgeInsets.all(16),
-            padding: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             decoration: ShapeDecoration(
               color: Colors.white,
               shape: RoundedRectangleBorder(
@@ -58,11 +59,29 @@ class QuestionsPage extends StatelessWidget {
           ),
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
-              return QuestionTemplate();
+              return QuestionTemplate(index: index);
             },
+          ),
+          16.heightBox,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff485f89),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(20.0), // Adjust the value as needed
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => const ReviewQuestion()));
+              },
+              child: const Text('Preview'),
+            ),
           ),
         ],
       ),
@@ -87,7 +106,7 @@ class QuestionsPage extends StatelessWidget {
           ),
         ),
         4.heightBox,
-        Text("#378"),
+        const Text("#378"),
       ],
     ));
   }

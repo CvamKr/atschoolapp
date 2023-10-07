@@ -1,3 +1,6 @@
+import 'package:atschoolapp/presentation/ui/conduct_checkins/provider/checkin_provider.dart';
+import 'package:atschoolapp/presentation/ui/conduct_checkins/questions/provider/questions_provider.dart';
+import 'package:atschoolapp/presentation/ui/conduct_checkins/review/review.dart';
 import 'package:atschoolapp/presentation/ui/custom_bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:atschoolapp/presentation/ui/home/home_screen.dart';
 import 'package:atschoolapp/presentation/ui/new_attendance/new_attendance_screen.dart';
@@ -37,8 +40,15 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(
               create: (context) => AttendanceFilterProvider(),
             ),
+            ChangeNotifierProvider(
+              create: (context) => QuestionProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (context) => CheckinFilterProvider(),
+            ),
           ],
           child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             // Providing a restorationScopeId allows the Navigator built by the
             // MaterialApp to restore the navigation stack when a user leaves and
             // returns to the app after it has been killed while running in the
@@ -86,8 +96,10 @@ class MyApp extends StatelessWidget {
                       return const SampleItemDetailsView();
                     case SampleItemListView.routeName:
                     default:
-                      return CustomBottomNavigationBar();
-                      
+                      return
+                          // ReviewQuestion();
+                          CustomBottomNavigationBar();
+
                       HomeScreen();
                       const NewAttendanceScreen();
                       const NewAttendanceFilterScreen();
